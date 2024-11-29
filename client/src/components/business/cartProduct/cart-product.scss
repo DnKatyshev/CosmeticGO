@@ -1,0 +1,100 @@
+.product-cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+
+    .css-19opgx6-MuiFormControlLabel-root{
+        width: 24px;
+    }
+
+    img{
+        width: 100px;
+        height: 100px;
+        border-radius: 12px;
+        @media (max-width: 600px) {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+
+    &__info{
+        flex: 20% 0 0;
+        p{
+            font-size: 18px;
+            font-weight: 700;
+            font-family: var(--font-inter);
+            @media (max-width: 600px) {
+                font-size: 15px;
+            }
+        }
+        span{
+            margin-top: 20px;
+            color: #99ff4f;
+            font-size: 20px;
+            font-weight: 900;
+            font-family: var(--font-raleway);
+        }
+    }
+
+
+    &__price{
+        .price-1{
+            font-size: 21px;
+            font-weight: 700;
+            font-family: var(--font-inter);
+            @media (max-width: 600px) {
+                font-size: 16px;
+            }
+        }
+        .price-2{
+            font-size: 18px;
+            font-weight: 700;
+            font-family: var(--font-inter);
+            text-decoration: line-through;
+            @media (max-width: 600px) {
+                font-size: 14px;
+            }
+        }
+    }
+
+
+    &__quantity{
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        
+        .quantity-icon{
+            display: flex;
+            background: #771cff;
+            padding: 6px;
+            border-radius: 6px;
+            transition: all .2s ease-in-out;
+            svg{
+                color: #fff;
+            }
+            &:hover{
+                background: #8e43ff;
+            }
+            &:disabled{
+                opacity: .3;
+            }
+        }
+
+        .quantity-input{
+            width: 60px;
+            height: 35px;
+            text-align: center;
+            font-family: var(--font-inter);
+            font-weight: 700;
+            font-size: 18px;
+            border: 2px solid #000;
+            @media (max-width: 600px) {
+                width: 35px;
+            }
+        }
+    }
+
+
+}

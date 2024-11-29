@@ -1,0 +1,76 @@
+.form-modal{
+    .form{
+        width:100%;
+        padding: 0;
+        background: #fff;
+    
+        &__main{
+            display: flex;
+            flex-direction: column;
+            row-gap: 30px;
+        }
+        
+        &__group{
+            display: flex;
+            flex-direction: column;
+        }
+    
+        &__label{
+            color: #000000;
+            font-size: 14px;
+            font-weight: 700;
+        }
+    
+        &__input{
+            padding: 5px 0px;
+            color: #000000;
+            background: transparent;
+            border-bottom: 2px solid rgba(46, 46, 46, 0.8);
+            font-family: var(--font-raleway);
+            font-weight: 700;
+            transition: all .4s ease;
+            &:focus{
+                border-bottom: 2px solid rgb(0, 0, 0);
+            }
+        }
+    
+    
+        &__btn{
+            padding: 15px 30px;
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            color: #fff;
+            background: #ff55e8;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 12px;
+            transition: all .3s ease;
+            &:hover{
+                background: #ff73ec;
+            }
+            &:disabled{
+                opacity: .7;
+                cursor: not-allowed;
+            }
+        }
+    
+    
+        &__error{
+            color: orange;
+            font-size: 14px;
+            font-weight: 400;
+            margin-top: 12px;
+        }
+    
+        &__warning{
+            display: inline-block;
+            margin-top: 15px;
+            color: #000000;
+            opacity: .5;
+            font-size: 10px;
+            font-weight: 900;
+        }
+    }
+}

@@ -1,0 +1,72 @@
+.form-modal{
+    max-height: 100vh;
+    overflow-y: scroll;
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 15px;
+    @media(max-width: 768px){
+        width: 90%;
+    }
+
+
+    &-success{
+        position: relative;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        height: 50%;
+        border-radius: 20px;
+        background: #7c7aff;
+        @media(max-width: 768px){
+            width: 90%;
+        }
+        h1{
+            color: #fff;
+            text-align: center;
+        }
+        svg{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            fill: #7aff7b;
+            width: 120px !important;
+            height: 120px !important;
+            border: 4px solid #7aff7b;
+            border-radius: 50%;
+            padding: 10px;
+        }
+    }
+
+    .google-btn{
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        max-width: 160px;
+        padding: 3px;
+        background: #fff;
+        color: #000;
+        font-weight: 900;
+        border: 1px solid #000;
+    }
+    .form-change{
+        max-width: 160px;
+        color: #000000;
+        background: transparent;
+        border: 2px solid #a68bff;
+        &:hover{
+            border: 2px solid #683ff1
+        }
+    }
+}

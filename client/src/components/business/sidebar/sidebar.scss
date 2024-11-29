@@ -1,0 +1,24 @@
+.sidebar{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 50px;
+    padding: 0 10px;
+
+    &__item{
+
+    }
+    &__title{
+        color: #000;
+        font-family: var(--font-raleway);
+        font-weight: 700;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    &__checkbox{
+        display: flex;
+        flex-direction: column;
+    }
+}

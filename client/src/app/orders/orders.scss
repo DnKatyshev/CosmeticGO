@@ -1,0 +1,16 @@
+.paid-orders{
+    padding: 0 20px;
+
+    &__title{
+        font-size: 26px;
+        font-weight: 900;
+        font-family: var(--font-raleway);
+        margin-bottom: 40px;
+    }
+
+    &__orders-list{
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+    }
+}

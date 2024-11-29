@@ -1,0 +1,54 @@
+.catalog-product{
+    position: relative;
+    flex: 1 1 30%;
+    color: #000;
+    transition: all .4s ease;
+    &:hover{
+        background: #fcf1ff;
+    }
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+        margin-top: 10px;
+        padding: 10px;
+    }
+    &__name{
+        font-size: 20px;
+        font-weight: 700;
+    }
+    &__rating{
+
+    }
+    &__price{
+        h3{
+            font-size: 22px;
+            font-weight: var(--font-raleway);
+            font-weight: 900;
+        }
+        p{
+            font-size: 14px;
+            font-weight: var(--font-raleway);
+            font-weight: 300;
+            color: #a5a5a5;
+            text-decoration: line-through;
+        }
+    }
+
+    &__vegan{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+        padding: 5px 0;
+        text-align: center;
+        background: #00d207;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+    @media(max-width: 1100px){
+        flex: 1 1 48%;
+    }
+}

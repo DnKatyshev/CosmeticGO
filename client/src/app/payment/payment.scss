@@ -1,0 +1,100 @@
+.payment{
+    padding: 0 20px;
+
+    &__title{
+        font-size: 26px;
+        font-weight: 900;
+        font-family: var(--font-raleway);
+        margin-bottom: 30px;
+    }
+
+
+    &__body{
+        display: grid;
+        grid-template: 1fr / 68% 30%;
+        column-gap: 30px;
+        @media (max-width: 1100px) {
+            grid-template: 85% 30% / 1fr;
+        }
+    }
+
+
+    &__main{
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+    }
+    &__products-list{
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+    }
+    &__address{
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+    }
+    &__textarea{
+        background: #eee5ff;
+        width: 100%;
+        height: 200px;
+        resize: none;
+        padding: 6px;
+        font-weight: 500;
+        font-family: var(--font-raleway);
+        font-size: 16px;
+        border-radius: 10px;
+    }
+
+
+    &__dashboard{
+        background: #fff;
+
+        &-title{
+            font-size: 20px;
+            font-weight: 700;
+            font-family: var(--font-inter);
+            margin-bottom: 30px;
+        }
+        &-list{
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+        }
+        .payment__dashboard-li{
+            display: flex;
+            align-items: center;
+            column-gap: 40px;
+            h6{
+                font-size: 18px;
+                font-weight: 700;
+                font-family: var(--font-raleway);
+            }
+            p{
+                letter-spacing: 1px;
+                font-weight: 700;
+            }
+
+        }
+        &-btn{
+            max-width: 100% !important;
+            margin-top: 30px !important;
+            background: #21c400 !important;
+            &:hover{
+                background: #26e400 !important;
+            }
+        }
+    }
+
+    .payment-empty{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .react-dadata__input{
+        font-weight: 500;
+        font-family: var(--font-raleway);
+    }
+}

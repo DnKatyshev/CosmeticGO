@@ -1,0 +1,47 @@
+.paid-order{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    &__title{
+        font-size: 20px;
+        font-weight: 500;
+        font-family: var(--font-raleway);
+    }
+
+
+    &__main{
+        display: flex;
+        align-items: center;
+        column-gap: 40px;
+        h3{
+            font-size: 22px;
+            font-weight: 700;
+            font-family: var(--font-inter);
+            color: #c830ff;
+        }
+    }
+
+
+    &__buttons{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__status{
+        background: #09ff00;
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 8px;
+    }
+    &__cancel{
+        background: #ff0000;
+        color: #fff;
+        padding: 12px 18px;
+    }
+
+
+    .css-1jpc804-MuiDivider-root{
+        border-color: rgba(0, 0, 0, 0.3);
+    }
+}

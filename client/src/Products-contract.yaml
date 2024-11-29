@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  termsOfService: http://swagger.io/terms/
+  version: 1.0.11
+servers:
+  - url: http://localhost:8000/server-side
+    description: Local development server
+tags:
+  - name: PRODUCTS
+    description: Product-API
+  - name: REVIEWS
+    description: Reviews-API
+    
+    
+paths:
+
+  /products/filter:
+    get:
+      tags:
+        - PRODUCTS
+      summary: Get products (optionally filtered by price)
+      description: Returns a list of products, optionally filtered by a price range using query parameters.
+      operationId: getAllOrFilteredProducts
+      parameters:
+        - name: min
+          in: query
+          description: Minimum price for filtering
+          required: false
+          schema:
+            type: integer
+            example: 100
+        - name: max
+          in: query
+          description: Maximum price for filtering
+          required: false
+          schema:
+            type: integer
+            example: 300
+        - name: countryId
+          in: query
+          description: ID of country for filtering
+          required: false
+          schema:
+            type: integer
+            example: 5
+        - name: vegan
+          in: query
+          description: Vegan-property for filtering
+          required: false
+          schema:
+            type: boolean
+            example: true
+        - name: sort
+          in: query
+          description: Price-sorting by increase / decrease / categories
+          required: false
+          schema:
+            type: string
+            example: 'increase'
+      responses:
+        '200':
+          description: All Products or filtered Products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid query params
+        '404':
+          description: No products found
+
+  /product/{productId}:
+    get:
+      tags:
+        - PRODUCTS
+      summary: Get one product
+      description: Get one product by his ID(ObjetID in MongoDB)
+      operationId: getOneProduct
+      parameters:
+        - name: productId
+          in: path
+          description: ID of product
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SearchedProduct'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+          
+
+  /products-search:
+    get:
+      tags:
+        - PRODUCTS
+      summary: Get products by searching by text from CatalogInput
+      description: Returns a list of products with some fields(mainImg and name), found by text from CatalogInput by name/category.name/brand fields
+      operationId: getSearchedProducts
+      parameters:
+        - name: inputText
+          in: query
+          description: Text from CatalogInput
+          required: true
+          schema:
+            type: string
+            example: "Консиллеры"
+      responses:
+        '200':
+          description: All Products founded by text from CatalogInput
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid query params
+        '404':
+          description: No products found
+
+
+  /create-review:
+    post:
+      tags:
+        - REVIEWS
+      summary: Create a new review
+      description: Create a new review by product
+      operationId: createReview
+      requestBody:
+        description: Review from user (object)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid info
+          
+  /get-reviews:
+    post:
+      tags:
+        - REVIEWS
+      summary: Get all reviews
+      description: Get all reviews "reviews"-field (array of IDs) from Product/User models
+      operationId: getReviews
+      requestBody:
+        description: Array of ID's in reviews-field from Product/User models
+        content:
+          application/json:
+            schema:
+              type: array
+              items: 
+                type: string
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Review'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+            
+components:
+  schemas:
+
+    Product:
+      type: object
+      properties:
+        product_id:
+          type: integer
+          description: Уникальный идентификатор продукта
+        name:
+          type: string
+          description: Название продукта
+        price:
+          type: number
+          description: Цена продукта
+        discountCardPrice:
+          type: number
+          description: Цена со скидочной картой
+        category:
+          type: object
+          properties:
+            name:
+              type: string
+            id:
+              type: number
+          required:
+            - name
+            - id
+          description: Категория продукта
+        brand:
+          type: string
+          description: Бренд продукта
+        weight:
+          type: number
+          description: Вес продукта
+        availability:
+          type: boolean
+          description: Доступность продукта
+        rating:
+          type: number
+          description: Рейтинг продукта
+        ingredients:
+          type: string
+          description: Ингредиенты продукта
+        description:
+          type: string
+          description: Описание продукта
+        vegan:
+          type: boolean
+          description: Веганский продукт или нет
+        photos:
+          type: array
+          items:
+            type: string
+          description: Список фотографий продукта
+        country:
+          type: object
+          properties:
+            name:
+              type: string
+            id:
+              type: number
+          required:
+            - name
+            - id
+          description: Страна-производитель продукта
+        reviews: 
+          type: array
+          items: 
+            type: object
+            properties:
+              productId: 
+                type: number
+                example: 1
+              userId: 
+                type: number
+                example: 5
+              text: 
+                type: string
+                example: 'Отличный товар!'
+              rating: 
+                type: number
+                example: 4.5
+
+    SearchedProduct:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Название продукта
+        discountCardPrice:
+          type: number
+          description: Цена со скидочной картой
+        photos:
+          type: array
+          items:
+            type: string
+          description: Список фотографий продукта
+
+    Review:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: ID продукта, для которого создаётся отзыв
+        user_id:
+          type: string
+          description: ID пользователя, который создаёт отзыв
+        username:
+          type: string
+          description: Имя пользователя, который создаёт отзыв
+        text:
+          type: string
+          description: Содержание отзыва
+        rating:
+          type: number
+          description: Оценка продукта

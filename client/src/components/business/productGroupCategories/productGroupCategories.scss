@@ -1,0 +1,16 @@
+.product-group{
+    margin-bottom: 40px;
+    padding: 0 15px;
+    &__body{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px 20px;
+    }
+    
+    &__title{
+        font-family: var(--font-raleway);
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+}

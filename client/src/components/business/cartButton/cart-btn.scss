@@ -1,0 +1,29 @@
+.cart-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 12px;
+    width: 140px;
+    background: #383838;
+    padding: 7px;
+    border-radius: 18px;
+    transition: all .3s ease;
+    p{
+        color: #fff;
+        font-family: var(--font-inter);
+        font-weight: 700;
+    }
+    span{
+        height: 25px;
+        width: 1px;
+        background: #fff;
+    }
+    svg{
+        color: #fff;
+        width: 30px;
+        height: 30px;
+    }
+    &:hover{
+        background: #212121;
+    }
+}

@@ -1,0 +1,329 @@
+.layout{
+    position: relative;
+    height: 100vh;
+    &__body{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        justify-content: space-between;
+        height: 100%;
+        @media(max-width: 768px) {
+            grid-template: 40% 60% / 100%;
+        }
+    }
+
+
+    &__text{
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 25px;
+        margin-left: 50px;
+        @media(max-width: 768px) {
+            margin-left: 0;
+            text-align: center;
+            justify-content: end;
+        }
+        h3{
+            font-weight: 900;
+            font-size: 18px;
+            color: #BBB0FF;
+        }
+        h1{
+            font-weight: 700;
+            font-size: clamp(24px, 3vw, 45px);
+        }
+        p{
+            font-family: var(--font-raleway);
+            line-height: 30px;
+            span{
+                font-weight: 700;
+            }
+        }
+    }
+    
+    
+    &__decor{
+        position: relative;
+        z-index: 1;
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .layout__cube{
+            position: absolute;
+        }
+        .layout__cube.first{
+            top: 30%;
+            left: 10%;
+        }
+        .layout__cube.second{
+            bottom: 20%;
+            left: 15%;
+        }
+        .layout__cube.third{
+            top: 20%;
+            right: 10%;
+            svg{
+                transform: rotate(90deg);
+            }
+        }
+        .layout__cube.fourth{
+            bottom: 30%;
+            right: 15%;
+            svg{
+                transform: rotate(50deg);
+            }
+        }
+    }
+    
+
+    &__line{
+        position: absolute;
+        top: -25%;
+        left: 0;
+        z-index: 1;
+        opacity: .6;
+    }
+/* Общий контейнер для кругов */
+    .circles-container {
+        position: absolute;
+        inset: 0;
+    }
+  
+  /* Основной большой круг */
+    .circle-large {
+        position: absolute;
+        width: 966px;
+        height: 100vh;
+        background-color: #C0F0FF;
+        border-radius: 50%;
+        left: 20%;
+        filter: blur(100px);
+    }
+  
+    /* Второй большой круг */
+    .circle-large-secondary {
+        position: absolute;
+        width: 966px;
+        height: 100vh;
+        background-color: #93AAFF;
+        border-radius: 50%;
+        left: 50%;
+        filter: blur(100px);
+    }
+
+    /* Третий большой круг */
+    .circle-large-tertiary {
+        position: absolute;
+        width: 966px;
+        height: 100vh;
+        background-color: #FEBDFF;
+        border-radius: 50%;
+        left: 60%;
+        filter: blur(100px);
+    }
+
+    /* Маленький круг 1 */
+    .circle-small {
+        position: absolute;
+        width: 425px;
+        height: 425px;
+        background-color: #C0F0FF;
+        border-radius: 50%;
+        bottom: 10%;
+        left: 10%;
+        filter: blur(100px);
+    }
+
+    /* Маленький круг 2 */
+    .circle-small-secondary {
+        position: absolute;
+        width: 189px;
+        height: 189px;
+        background-color: #E7C0FF;
+        border-radius: 50%;
+        bottom: 5%;
+        left: 12%;
+        filter: blur(100px);
+    }
+
+    /* Полупрозрачная форма */
+    .custom-shape {
+        position: absolute;
+        width: 500px;
+        height: 400px;
+        top: 30%;
+        left: 40%;
+        background-color: rgba(250, 0, 255, 0.63);
+        border-radius: 50%;
+        opacity: 0.6;
+        filter: blur(100px);
+        transform: rotate(45deg);
+    }
+  
+}
+
+
+
+.video {
+    &__body {
+        position: relative;
+        height: 150vh;
+    }
+
+    &__main {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        min-height: 70vh;
+        object-fit: cover;
+        padding: 15px;
+        border-radius: 60px;
+        filter: grayscale(1);
+    }
+
+    &__text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-weight: 900;
+    }
+    &__title{
+        color: #ff20cb;
+        font-size: clamp(24px, 4vw, 60px);
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    &__subtitle{
+        color: #ff20cb;
+        font-size: clamp(20px, 2vw, 26px);
+        letter-spacing: 3px;
+    }
+}
+
+
+
+.home-catalog{
+
+    &__body{
+        height: 100vh;
+        display: grid;
+        grid-template: repeat(3, 1fr) / 49% 49%;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px;
+        @media(max-width: 960px){
+            height: 65vh;
+            grid-template: repeat(4, 200px) / 49% 49%;
+        }
+    }
+
+    &__item{
+        position: relative;
+        padding: 20px;
+        border-radius: 12px;
+        h3{
+            font-size: clamp(18px, 2vw, 32px);
+            font-weight: 700;
+            font-family: var(--font-raleway);
+        }
+    }
+
+    &__item{
+        color: #fff;
+        border-radius: 20px;
+        transition: all .3s ease;
+        &:hover{
+            opacity: .8;
+        }
+    }
+    &__item.first{
+        grid-column: span 1;
+        grid-row: span 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background: url('../../../assets/images/gradientAqua.png') center/cover;
+        text-transform: uppercase;
+        white-space: nowrap;
+        img{
+            width: 70px;
+            height: 70px;
+        }
+        @media(max-width: 960px){
+            grid-column: span 2;
+            grid-row: span 2;
+            flex-direction: column;
+            row-gap: 30px;
+        }
+    }
+    &__item.second{
+        background: url('../../../assets/images/gradientPink.png') center/cover;
+    }
+    &__item.third{
+        background: url('../../../assets/images/gradientBlue.png') center/cover;
+    }
+    &__item.fourth{
+        background: url('../../../assets/images/gradientPeach.png') center/cover;
+    }
+    &__item.fifth{
+        background: url('../../../assets/images/gradientPurple.png') center/cover;
+    }
+    
+}
+
+
+
+.discount{
+
+    &__body{
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        @media(max-width: 960px){
+            flex-direction: column-reverse;
+        }
+    }
+
+    &__content{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 15px;
+        padding: 30px;
+        background: linear-gradient(146deg, #5f6aff, #a1ff9e);
+        h1{
+            font-size: 32px;
+            font-weight: 700;
+        }
+        p{
+            font-family: var(--font-raleway);
+            font-weight: 700;
+            line-height: 30px;
+        }
+        ul li{
+            margin-top: 12px;
+            font-weight: 900;
+        }
+        @media(max-width: 960px){
+            width: 100%;
+        }
+    }
+
+    &__svg{
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: .4;
+    }
+}
+

@@ -1,0 +1,112 @@
+.profile{
+    
+    &__body{
+        position: relative;
+        background: #fff6e8;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        row-gap: 50px;
+    }
+
+    &__header{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    &__verified{
+        color: #fff;
+        padding: 8px;
+        border-radius: 6px;
+    }
+    &__verified.true{
+        background: #91ff61;
+    }
+    &__verified.false{
+        background: #ff6161;
+    }
+
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+    &__info-item{
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        h2{
+            font-family: var(--font-inter);
+            font-weight: 700;
+            font-size: 20px;
+        }
+        p{
+            font-family: var(--font-raleway);
+            font-weight: 900;
+            font-size: 18px;
+            color: #ec5eff;
+        }
+    }
+
+
+    &__orders{
+        h1{
+            font-family: var(--font-inter);
+            font-weight: 700;
+            font-size: 24px;
+        }
+    }
+
+
+    &__reviews{
+        h1{
+            margin-bottom: 20px;
+        }
+        &-main{
+            display: flex;
+            flex-direction: column;
+            row-gap: 30px;
+        }
+        &-empty p{
+            color: #ec5eff;
+            font-family: var(--font-raleway);
+        }
+    }
+
+
+    &__out-btn{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    &-preloader{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+    }
+
+}
+
+
+.flower{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    h3{
+
+        margin-top: 30px;
+    }
+    &__svg{
+    }
+}
