@@ -51,8 +51,12 @@ class OrderService{
         // Получаем актуальную корзину из БД после обновлений ( с данными о products через их id-шники )
         order = await Order.findOne({ user }).populate('products.product');
 
+        if (!order) {
+            throw new Error('Order not found');
+        }
+
         // Рассчитываем общую стоимость и записываем в корзину
-        const totalPrice = order.products.reduce((total:number, item:any) => {
+        const totalPrice = order.products.reduce((total, item) => {
             const productPrice = item.product.price; // Получаем price из документов Product
             return total + productPrice * item.quantity;
         }, 0);
@@ -64,6 +68,10 @@ class OrderService{
             { totalPrice },
             { new: true }
         )
+
+        if (!order) {
+            throw new Error('Order not found');
+        }
         order.totalPrice = totalPrice
 
         return await order.save()
@@ -125,6 +133,10 @@ class OrderService{
             { status: "PENDING", address, comment, updatedAt: Date.now() },
             { new: true }
         );
+
+        if (!order) {
+            throw new Error('Order not found');
+        }
         
         return await order.save()
     }
@@ -168,7 +180,7 @@ class OrderService{
         // Добавить данные в PaidOrder
         const orderProducts = order.products;
 
-        const newOrder = orderProducts.map((product:any) => ({
+        const newOrder = orderProducts.map((product) => ({
             product: product.product,
             quantity: product.quantity,
         }));
