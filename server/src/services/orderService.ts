@@ -28,7 +28,7 @@ class OrderService{
         }
 
         // Проверяем - есть ли товар уже в ЗАКАЗЕ
-        const productIndex = order.products.findIndex(item => item.product.toString() === productId);
+        const productIndex = order.products.findIndex((item: any) => item.product.toString() === productId);
 
         // Если ЕСТЬ - просто увеличваем его кол-во, если ещё НЕТ - добавляем новый товар в ЗАКАЗ
         if (productIndex !== -1) {
@@ -52,7 +52,7 @@ class OrderService{
         order = await Order.findOne({ user }).populate('products.product');
 
         // Рассчитываем общую стоимость и записываем в корзину
-        const totalPrice = order.products.reduce((total, item) => {
+        const totalPrice = order.products.reduce((total:number, item:any) => {
             const productPrice = item.product.price; // Получаем price из документов Product
             return total + productPrice * item.quantity;
         }, 0);
@@ -168,7 +168,7 @@ class OrderService{
         // Добавить данные в PaidOrder
         const orderProducts = order.products;
 
-        const newOrder = orderProducts.map((product) => ({
+        const newOrder = orderProducts.map((product:any) => ({
             product: product.product,
             quantity: product.quantity,
         }));

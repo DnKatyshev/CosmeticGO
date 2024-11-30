@@ -23,7 +23,7 @@ class CartService{
         }
 
         // Проверяем - есть ли товар уже в корзине
-        const productIndex = cart.products.findIndex(item => item.product.toString() === productId);
+        const productIndex = cart.products.findIndex((item:any) => item.product.toString() === productId);
 
         // Если ЕСТЬ - просто увеличваем его кол-во, если ещё НЕТ - добавляем новый товар в корзину
         if (productIndex !== -1) {
@@ -47,7 +47,7 @@ class CartService{
         cart = await Cart.findOne({ user }).populate('products.product');
 
         // Рассчитываем общую стоимость и записываем в корзину
-        const totalPrice = cart.products.reduce((total, item) => {
+        const totalPrice = cart.products.reduce((total:number, item:any) => {
             const productPrice = item.product.price; // Получаем price из документов Product
             return total + productPrice * item.quantity;
         }, 0);
@@ -59,6 +59,7 @@ class CartService{
             { totalPrice },
             { new: true }
         )
+        //@ts-expect-error
         cart?.totalPrice = totalPrice
 
         return await cart.save()
@@ -84,7 +85,7 @@ class CartService{
             { new: true }
         )
 
-        const productIndex = cart.products.findIndex(item => item.product.toString() === productId);
+        const productIndex = cart.products.findIndex((item:any) => item.product.toString() === productId);
         const isQuantityEquelsOne = cart.products[productIndex].quantity === 1
         const productQuantity = cart.products[productIndex].quantity
 
