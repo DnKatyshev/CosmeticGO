@@ -6,7 +6,7 @@ export const ProductQueryParamsShema = z.object({
     minPrice: z.coerce.number().optional(),
     maxPrice: z.coerce.number().optional(),
     vegan: z.coerce.boolean().optional(),
-    countryId: z.coerce.number().optional(),
+    countryId: z.coerce.string().optional(),
     sort: z.enum(['increase', 'decrease', 'categories']).optional()
 })
 export const OneProductIdShema = z.string()
