@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build-server": "tsc --transpileOnly",
+    "build-server": "ts-node --transpile-only ./src/server.ts",
     "dev-server": "nodemon --exec ts-node --transpile-only src/server.ts",
     "start-server": "node dist/server.js"
   },
