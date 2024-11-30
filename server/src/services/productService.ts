@@ -1,106 +1,88 @@
-import Product from "../model/productModel"
-import {TProductQueryParams} from "../types/types"
+import Product from "../model/productModel";
+import { TProductQueryParams } from "../types/types";
 
-class ProductService{
+class ProductService {
+  // Получение всех продуктов с сортировкой по категориям
+  async getAllProductsByCategories() {
+    return await Product.find().sort({
+      "category.id": 1, // Используем dot notation
+    });
+  }
 
-    async getAllProductsByCategories(){
-        return await Product.find().sort({
-            'category.id': 1 // поиск по ВЛОЖЕННЫМ полям должна использовать точечную нотацию(dot notation)
-        })
+  // Фильтрация продуктов
+  async getFilteredProducts(params: TProductQueryParams) {
+    const { minPrice, maxPrice, countryId, vegan, sort } = params;
+
+    console.log("PARAMS: ", params);
+
+    const queryParamsObj: Record<string, any> = {};
+
+    // Исправление: Проверка на boolean | undefined
+    if (vegan === true) {
+      queryParamsObj.vegan = true;
     }
 
-    async getFilteredProducts(params :TProductQueryParams){
-
-        const {minPrice, maxPrice, countryId, vegan, sort} = params
-        console.log('PARAMS: ', params)
-
-
-        const queryParamsObj:TProductQueryParams = {}
-        
-
-        if(vegan === 'true'){
-            queryParamsObj.vegan = true
-        }
-        if(countryId){
-            queryParamsObj['country.id'] = { $in: countryId.split(',').map(Number) }; // поиск по любому значению из массива (приходит строка, тут делаем из неё массив)
-        }
-        if(minPrice && maxPrice){
-            queryParamsObj.price = {
-                $gte: Number(minPrice),
-                $lte: Number(maxPrice)
-            };
-        }
-
-        console.log('queryParamsObj: ', queryParamsObj)
-
-        if(sort === 'increase'){
-            return await Product.aggregate([
-                { $match: queryParamsObj },
-                { $sort: { 'category.id': 1, price: 1 } }
-            ]);
-        }
-        if(sort === 'decrease'){
-            return await Product.aggregate([
-                { $match: queryParamsObj },
-                { $sort: { 'category.id': 1, price: -1 } }
-            ]);
-        }
-        if(sort === 'categories'){
-            return await Product.find(queryParamsObj).sort({
-                'category.id': 1
-            })
-        }
-
-        return await Product.find(queryParamsObj).sort({
-            'category.id': 1
-        })
+    // Исправление: Правильное имя поля (countryId вместо country.id)
+    if (countryId) {
+      if (typeof countryId === "string") {
+        queryParamsObj["country.id"] = { $in: countryId.split(",").map(Number) }; // Преобразование строки в массив чисел
+      } else {
+        throw new Error("Invalid countryId format");
+      }
     }
 
-
-    async getOneProduct(id:string){
-        return await Product.find({
-            _id: id
-        })
+    // Проверка minPrice и maxPrice
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      queryParamsObj.price = {
+        $gte: Number(minPrice),
+        $lte: Number(maxPrice),
+      };
     }
 
+    console.log("queryParamsObj: ", queryParamsObj);
 
-    async getSearchedProducts(inputText:string){
-        
-        const regex = new RegExp(inputText, 'i'); // регулярка, которая позволяет искать подстроки независимо от регистра
-
-        // Поиск товаров по одному из указанных полей
-        return await Product.find({
-            $or: [
-                { name: regex },
-                { 'category.name': regex },
-                { brand: regex }
-            ]
-        }).select('_id name discountPrice photos');
+    // Обработка сортировки
+    if (sort === "increase") {
+      return await Product.aggregate([
+        { $match: queryParamsObj },
+        { $sort: { "category.id": 1, price: 1 } },
+      ]);
+    }
+    if (sort === "decrease") {
+      return await Product.aggregate([
+        { $match: queryParamsObj },
+        { $sort: { "category.id": 1, price: -1 } },
+      ]);
+    }
+    if (sort === "categories") {
+      return await Product.find(queryParamsObj).sort({
+        "category.id": 1,
+      });
     }
 
+    // Сортировка по умолчанию
+    return await Product.find(queryParamsObj).sort({
+      "category.id": 1,
+    });
+  }
 
-    // async getPriceRangeFilteredProducts(min:string, max:string){
-    //     return await Product.find({
-    //         price: {$gte: Number(min), $lte: Number(max)}
-    //     })
-    // }
+  // Получение одного продукта по ID
+  async getOneProduct(id: string) {
+    return await Product.findById(id); // Используем findById вместо find для уникальных идентификаторов
+  }
 
-    // async getProductsFilteredByDecreasingPrice(){
-    //     return await Product.find().sort({price: -1})
-    // }
+  // Поиск продуктов
+  async getSearchedProducts(inputText: string) {
+    const regex = new RegExp(inputText, "i"); // Регулярка для поиска независимо от регистра
 
-    // async getProductsFilteredByVegan(){
-    //     return await Product.find({
-    //         vegan: true
-    //     })
-    // }
-    
-    // async getProductsFilteredByCountry(countryId:string){
-    //     return await Product.find({
-    //         'country.id': countryId
-    //     })
-    // }
-
+    return await Product.find({
+      $or: [
+        { name: regex },
+        { "category.name": regex },
+        { brand: regex },
+      ],
+    }).select("_id name discountPrice photos");
+  }
 }
 
 export default new ProductService();

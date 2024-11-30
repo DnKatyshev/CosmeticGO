@@ -46,6 +46,10 @@ class CartService{
         // Получаем актуальную корзину из БД после обновлений ( с данными о products через их id-шники )
         cart = await Cart.findOne({ user }).populate('products.product');
 
+        if (!cart) {
+            throw new Error('Cart not found');
+        }
+
         // Рассчитываем общую стоимость и записываем в корзину
         const totalPrice = cart.products.reduce((total:number, item:any) => {
             const productPrice = item.product.price; // Получаем price из документов Product
@@ -59,6 +63,10 @@ class CartService{
             { totalPrice },
             { new: true }
         )
+
+        if (!cart) {
+            throw new Error('Cart not found');
+        }
         //@ts-expect-error
         cart?.totalPrice = totalPrice
 

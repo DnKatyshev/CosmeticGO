@@ -56,7 +56,7 @@ class OrderService{
         }
 
         // Рассчитываем общую стоимость и записываем в корзину
-        const totalPrice = order.products.reduce((total, item) => {
+        const totalPrice = order.products.reduce((total:number, item:any) => {
             const productPrice = item.product.price; // Получаем price из документов Product
             return total + productPrice * item.quantity;
         }, 0);

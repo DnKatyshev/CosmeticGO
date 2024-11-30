@@ -63,7 +63,7 @@ class ProductController{
                 });
             } else {
                 // Делаем валидацию в runtime через ZOD
-                if(CatalogInputTextShema.safeParse(inputText).success){
+                if(typeof inputText === 'string' && CatalogInputTextShema.safeParse(inputText).success){
         
                     const result = await ProductService.getSearchedProducts(inputText)
                     res.status(200).json({
